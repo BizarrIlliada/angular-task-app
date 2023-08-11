@@ -9,6 +9,7 @@ const routes: Routes = [
   { path: 'login', component: LoginPageComponent },
   { path: 'users', component: UsersPageComponent },
   { path: 'user/:id', component: UserInfoComponent },
+  // *NEED FIXES* it must exist something like Vue Routing Guards but Angular version!
   {
     path: '',
     redirectTo: localStorage.getItem('isAuthorized') === 'true' ? '/users' : 'login',
