@@ -13,7 +13,7 @@ const routes: Routes = [
   { path: 'users', component: UsersPageComponent },
   // *NEED FIXES* nested routes???
   { path: 'users/add', component: AddUserComponent },
-  { path: 'users/:id', component: UserInfoComponent },
+  { path: 'users/:userId', component: UserInfoComponent },
   {
     path: '',
     redirectTo: 'login',

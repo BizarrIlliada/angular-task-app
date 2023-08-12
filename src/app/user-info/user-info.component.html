@@ -1,1 +1,11 @@
-<p>user-info works!</p>
+<section *ngIf="currentUser">
+  <h2>{{ currentUser.name }}</h2>
+  <p>Date of creation: {{ currentUser.date }}</p>
+  <ul>
+    Permissions:
+    <li *ngFor="let permission of currentUser.permissions">
+      {{ permission }}
+    </li>
+  </ul>
+  <a routerLink="/users">X</a>
+</section>

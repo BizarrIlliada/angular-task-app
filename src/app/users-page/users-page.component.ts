@@ -2,20 +2,12 @@ import { Component } from '@angular/core';
 import { RequestsUser } from '../requests/users';
 import { Router } from '@angular/router';
 
-// *NEED FIXES* change types to correct
-interface User {
-  date: string | any,
-  name: string | any,
-  id: string | any,
-  permissions?: any,
-}
 @Component({
   selector: 'app-users-page',
   templateUrl: './users-page.component.html',
   styleUrls: ['./users-page.component.scss']
 })
 export class UsersPageComponent {
-  loadedUsers: User[] = [];
   listOfUsers: User[] = [];
   nameSortParam: 'asc' | 'desc' = 'desc';
   dateSortParam: 'asc' | 'desc' = 'asc';
@@ -25,7 +17,7 @@ export class UsersPageComponent {
   ngOnInit() {
     this.requestUsers.getUsers().subscribe((users: Record<string, any>) => {
       for (const id in users) {
-        this.loadedUsers.push({
+        this.listOfUsers.push({
           id,
           name: users[id].name,
           date: users[id].date,
@@ -33,8 +25,6 @@ export class UsersPageComponent {
         })
       }
     });
-
-    this.listOfUsers = this.loadedUsers;
   }
 
   onSortName() {
@@ -48,7 +38,7 @@ export class UsersPageComponent {
 
     this.dateSortParam = 'asc';
   }
-
+  // *NEED FIXES* it doesnt sort on first click
   onSortDate() {
     if (this.dateSortParam === 'asc') {
       this.listOfUsers.sort((a, b) => {

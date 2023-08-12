@@ -21,6 +21,12 @@
     &--name,
     &--date {
       cursor: pointer;
+      transition: 0.3s;
+    }
+
+    &--name:hover,
+    &--date:hover {
+      background-color: #d49494
     }
   }
 
@@ -32,6 +38,11 @@
     &--name {
       cursor: pointer;
       background-color: #ffafaf;
+      transition: 0.3s;
+    }
+
+    &--name:hover {
+      background-color: #f79c9c;
     }
   }
 }
