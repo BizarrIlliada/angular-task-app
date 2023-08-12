@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { RequestsUser } from '../requests/users';
 
 
@@ -18,9 +19,9 @@ export class AddUserComponent {
   ]
   selectedValues: string[] = [];
 
-  constructor(private formBuilder: FormBuilder, private requestUsers: RequestsUser) {
+  constructor(private formBuilder: FormBuilder, private requestUsers: RequestsUser, private router: Router) {
     this.addUserForm = this.formBuilder.group({
-      name: ['', [Validators.required, Validators.minLength(5)]],
+      name: ['', [Validators.required, Validators.minLength(3)]],
     });
 
     this.permissions.forEach(permission => {
@@ -29,27 +30,24 @@ export class AddUserComponent {
     })
 
     this.addUserForm.valueChanges.subscribe(values => {
-      this.selectedValues = Object.keys(values).filter(key => values[key] && key !== 'name')
-      
-      console.log(this.selectedValues);
+      this.selectedValues = Object.keys(values).filter(key => values[key] && key !== 'name');
     })
   }
 
-  async onSubmit() {
-    const date = new Date;
-    console.log(date.getTime());
+  onSubmit() {
+    if (this.addUserForm.valid) {
+      const date = new Date;
+  
+      this.requestUsers.addUser({
+        name: this.addUserForm.get('name')?.value,
+        date: date.toUTCString(),
+        permissions: this.selectedValues,
+      }).subscribe(() => {
+        this.addUserForm.reset();
+        this.selectedValues = [];
 
-    console.log(this.addUserForm.get('name')?.value);
-    
-    
-
-    await this.requestUsers.addUser({
-      name: this.addUserForm.get('name')?.value,
-      date: date.getTime(),
-      permissions: this.selectedValues,
-    }).subscribe();
-
-    this.addUserForm.reset();
-    this.selectedValues = [];
+        this.router.navigate(['/users']);
+      });
+    }
   }
 }

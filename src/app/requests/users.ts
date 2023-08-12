@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
-import { catchError, retry } from 'rxjs/operators';
+import { catchError, map, retry } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -13,21 +13,21 @@ export class RequestsUser {
   constructor(private http: HttpClient) {}
 
   getUsers() {
-    try {
-      const response = this.http.get(RequestsUser.USERS_URL);
+    return this.http.get(RequestsUser.USERS_URL).pipe(
+      map(result => result),
 
-      console.log(123);
-    } catch (error) {
-      throw new Error(`Oops, you got an error - ${error}`);
-    }
+      catchError(error => {
+        throw new Error('Oops, you got an error - ' + error)
+      })
+    );
   }
 
   // *NEED FIXES* change any type
-  addUser(payload: any): Observable<any> {
-    try {
-      return this.http.post(RequestsUser.USERS_URL, payload);
-    } catch (error) {
-      throw new Error(`Oops, you got an error - ${error}`);
-    }
+  addUser(payload: any) {
+    return this.http.post(RequestsUser.USERS_URL, payload).pipe(
+      catchError(error => {
+        throw new Error('Oops, you got an error - ' + error)
+      }),
+    );
   }
 }

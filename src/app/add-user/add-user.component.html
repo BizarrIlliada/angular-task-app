@@ -1,6 +1,10 @@
 <form [formGroup]="addUserForm" (submit)="onSubmit()">
-  <label for="name">Name: </label>
-  <input type="text" id="name" formControlName="name">
+  <label for="name">Name:
+    <input type="text" id="name" formControlName="name">
+    <p *ngIf="addUserForm.get('name')?.hasError('required') && addUserForm.get('name')?.touched">
+      Please, enter a data!
+    </p>
+  </label>
   <label *ngFor="let permission of permissions">
     <input type="checkbox" [formControlName]="permission.value"> {{ permission.label }}
   </label>
