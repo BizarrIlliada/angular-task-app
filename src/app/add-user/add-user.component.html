@@ -1,0 +1,11 @@
+<form [formGroup]="addUserForm">
+  <label for="name">Name: </label>
+  <input type="text" id="name" formControlName="name">
+  {{ addUserForm.value.name }}
+  <label *ngFor="let permission of permissions">
+    <input type="checkbox" [formControlName]="permission.value"> {{ permission.label }}
+  </label>
+  <button type="submit">
+    Add new user
+  </button>
+</form>
