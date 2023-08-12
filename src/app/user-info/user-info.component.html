@@ -1,11 +1,14 @@
-<section *ngIf="currentUser">
-  <h2>{{ currentUser.name }}</h2>
-  <p>Date of creation: {{ currentUser.date }}</p>
-  <ul>
-    Permissions:
-    <li *ngFor="let permission of currentUser.permissions">
+<section *ngIf="currentUser" class="user-info">
+  <header class="user-info__header">
+    <h2 class="user-info__title">Name: {{ currentUser.name }}</h2>
+    <a class="user-info__left-button" routerLink="/users">X</a>
+  </header>
+  <p class="user-info__date">Date of creation: {{ currentUser.date }}</p>
+  <p class="user-info__description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates adipisci soluta quod veritatis nam facere, eaque officia quas quasi ratione! Dolorem laboriosam quo vitae illo quos placeat reprehenderit atque, sed saepe consequuntur quis exercitationem labore, ullam inventore iure eligendi. Eos voluptatum quod esse vel mollitia unde, qui animi est eveniet?</p>
+  <ul class="user-info__list" *ngIf="currentUser.permissions">
+    <h3 class="user-info__list-title">Permissions:</h3>
+    <li class="user-info__list-item" *ngFor="let permission of currentUser.permissions">
       {{ permission }}
     </li>
   </ul>
-  <a routerLink="/users">X</a>
 </section>

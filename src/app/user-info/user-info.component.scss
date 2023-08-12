@@ -1,0 +1,42 @@
+.user-info {
+  margin: 0 auto;
+  width: 500px;
+  padding: 20px;
+  border: 1px solid black;
+  box-shadow: 3px 5px 7px #a39d9d;
+  background-color: #e3e3e3;
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__title {
+    margin: 0;
+  }
+
+  &__left-button {
+    font-size: 21px;
+    font-weight: bold;
+    text-decoration: none;
+    color: black;
+  }
+
+  &__date {
+    font-size: 14px;
+  }
+
+  &__description {
+    font-size: 16px;
+  }
+
+  &__list {
+    list-style: decimal;
+    text-transform: capitalize;
+    padding: 0;
+  }
+
+  &__list-title {
+    margin: 0;
+  }
+}

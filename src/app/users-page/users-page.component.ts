@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 export class UsersPageComponent {
   listOfUsers: User[] = [];
   nameSortParam: 'asc' | 'desc' = 'desc';
-  dateSortParam: 'asc' | 'desc' = 'asc';
+  dateSortParam: 'asc' | 'desc' = 'desc';
 
   constructor(private requestUsers: RequestsUser, private router: Router) {};
 
@@ -38,7 +38,7 @@ export class UsersPageComponent {
 
     this.dateSortParam = 'asc';
   }
-  // *NEED FIXES* it doesnt sort on first click
+
   onSortDate() {
     if (this.dateSortParam === 'asc') {
       this.listOfUsers.sort((a, b) => {
