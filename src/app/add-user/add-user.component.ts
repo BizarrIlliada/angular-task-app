@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { RequestsUser } from '../requests/users';
 
 
 @Component({
@@ -9,7 +10,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 })
 export class AddUserComponent {
   addUserForm: FormGroup;
-  name = new FormControl('')
+  name = new FormControl('');
   permissions = [
     { value: 'read', label: 'Read' },
     { value: 'write', label: 'Write' },
@@ -17,7 +18,7 @@ export class AddUserComponent {
   ]
   selectedValues: string[] = [];
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private formBuilder: FormBuilder, private requestUsers: RequestsUser) {
     this.addUserForm = this.formBuilder.group({
       name: ['', [Validators.required, Validators.minLength(5)]],
     });
@@ -34,7 +35,21 @@ export class AddUserComponent {
     })
   }
 
-  onSubmit(event: Event) {
-    event.preventDefault();
+  async onSubmit() {
+    const date = new Date;
+    console.log(date.getTime());
+
+    console.log(this.addUserForm.get('name')?.value);
+    
+    
+
+    await this.requestUsers.addUser({
+      name: this.addUserForm.get('name')?.value,
+      date: date.getTime(),
+      permissions: this.selectedValues,
+    }).subscribe();
+
+    this.addUserForm.reset();
+    this.selectedValues = [];
   }
 }
