@@ -1,18 +1,34 @@
-<table *ngIf="listOfUsers">
-  <tr>
-    <th>ID</th>
-    <th>Name</th>
-    <th>Permissions</th>
-    <th>Date</th>
-  </tr>
-  <tr *ngFor="let user of listOfUsers">
-    <td>{{ user.id }}</td>
-    <td [routerLink]="'/users/' + user.id">{{ user.name }}</td>
-    <td>{{ user.permissions }}</td>
-    <td>{{ user.date }}</td>
-  </tr>
-</table>
+<section class="user-page">
+  <table *ngIf="listOfUsers" class="user-page__table table">
+    <tr class="table__headers">
+      <th
+        (click)="onSortDate()"
+        class="table__header-cell table__header-cell--date"
+      >
+        Date
+      </th>
+      <th
+        (click)="onSortName()"
+        class="table__header-cell table__header-cell--name"
+      >
+        Name
+      </th>
+      <th class="table__header-cell">Permissions</th>
+    </tr>
 
-<button routerLink="/users/add">
-  Add new user
-</button>
+    <tr *ngFor="let user of listOfUsers" class="table__body">
+      <td class="table__body-cell">{{ user.date }}</td>
+      <td
+        class="table__body-cell table__body-cell--name"
+        [routerLink]="'/users/' + user.id"
+      >
+        {{ user.name }}
+      </td>
+      <td class="table__body-cell">{{ user.permissions }}</td>
+    </tr>
+  </table>
+  
+  <button routerLink="/users/add" class="user-page__button">
+    Add new user
+  </button>
+</section>

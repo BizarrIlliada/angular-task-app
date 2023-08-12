@@ -1,0 +1,46 @@
+.user-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  &__table {
+    margin-bottom: 10px;
+    min-width: 500px;
+  }
+}
+
+.table {
+  border-collapse: collapse;
+  border-spacing: 0px;
+
+  &__headers {
+    background-color: #e5b1b1;
+  }
+
+  &__header-cell {
+    &--name,
+    &--date {
+      cursor: pointer;
+    }
+  }
+
+  &__body {
+    background-color: #ffd8d8;
+  }
+  
+  &__body-cell {
+    &--name {
+      cursor: pointer;
+      background-color: #ffafaf;
+    }
+  }
+}
+
+.table,
+.table__headers,
+.table__header-cell,
+.table__body,
+.table__body-cell {
+  padding: 5px;
+  border: 1px solid black;
+}
